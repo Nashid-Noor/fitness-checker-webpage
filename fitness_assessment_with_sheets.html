@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Assessment</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+Pro:wght@400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0a0a0a;
@@ -179,7 +182,7 @@
             transform: translateX(5px);
         }
 
-        .option input:checked + label {
+        .option input:checked+label {
             border-color: var(--accent);
             background: rgba(255, 77, 77, 0.1);
         }
@@ -196,12 +199,12 @@
             flex-shrink: 0;
         }
 
-        .option input:checked + label .option-indicator {
+        .option input:checked+label .option-indicator {
             border-color: var(--accent);
             background: var(--accent);
         }
 
-        .option input:checked + label .option-indicator::after {
+        .option input:checked+label .option-indicator::after {
             content: '';
             width: 8px;
             height: 8px;
@@ -224,10 +227,25 @@
             flex-shrink: 0;
         }
 
-        .level-amateur { background: rgba(255, 77, 77, 0.2); color: var(--amateur); }
-        .level-beginner { background: rgba(255, 159, 28, 0.2); color: var(--beginner); }
-        .level-semipro { background: rgba(46, 196, 182, 0.2); color: var(--semipro); }
-        .level-pro { background: rgba(155, 93, 229, 0.2); color: var(--pro); }
+        .level-amateur {
+            background: rgba(255, 77, 77, 0.2);
+            color: var(--amateur);
+        }
+
+        .level-beginner {
+            background: rgba(255, 159, 28, 0.2);
+            color: var(--beginner);
+        }
+
+        .level-semipro {
+            background: rgba(46, 196, 182, 0.2);
+            color: var(--semipro);
+        }
+
+        .level-pro {
+            background: rgba(155, 93, 229, 0.2);
+            color: var(--pro);
+        }
 
         /* Submit Button */
         .submit-btn {
@@ -271,14 +289,16 @@
             left: 50%;
             margin-left: -12px;
             margin-top: -12px;
-            border: 3px solid rgba(255,255,255,0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
             border-top-color: white;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Results */
@@ -307,10 +327,21 @@
             margin-bottom: 10px;
         }
 
-        .result-level.amateur { color: var(--amateur); }
-        .result-level.beginner { color: var(--beginner); }
-        .result-level.semipro { color: var(--semipro); }
-        .result-level.pro { color: var(--pro); }
+        .result-level.amateur {
+            color: var(--amateur);
+        }
+
+        .result-level.beginner {
+            color: var(--beginner);
+        }
+
+        .result-level.semipro {
+            color: var(--semipro);
+        }
+
+        .result-level.pro {
+            color: var(--pro);
+        }
 
         .result-score {
             font-size: 1.2rem;
@@ -455,18 +486,37 @@
 
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Responsive */
@@ -491,6 +541,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header class="header">
@@ -658,7 +709,8 @@
                         <span class="question-label">4. Standing with legs straight, how far can you reach down?</span>
                         <div class="options">
                             <div class="option">
-                                <input type="radio" name="q4" id="q4a" value="0" data-answer="Cannot reach past knees" required>
+                                <input type="radio" name="q4" id="q4a" value="0" data-answer="Cannot reach past knees"
+                                    required>
                                 <label for="q4a">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Cannot reach past knees</span>
@@ -674,7 +726,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q4" id="q4c" value="2" data-answer="Can touch toes with fingertips">
+                                <input type="radio" name="q4" id="q4c" value="2"
+                                    data-answer="Can touch toes with fingertips">
                                 <label for="q4c">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Can touch toes with fingertips</span>
@@ -682,7 +735,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q4" id="q4d" value="3" data-answer="Can put palms flat on the floor">
+                                <input type="radio" name="q4" id="q4d" value="3"
+                                    data-answer="Can put palms flat on the floor">
                                 <label for="q4d">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Can put palms flat on the floor</span>
@@ -693,10 +747,12 @@
                     </div>
 
                     <div class="question">
-                        <span class="question-label">5. Shoulder reach test: One arm over shoulder, one behind back—can your fingers touch?</span>
+                        <span class="question-label">5. Shoulder reach test: One arm over shoulder, one behind back—can
+                            your fingers touch?</span>
                         <div class="options">
                             <div class="option">
-                                <input type="radio" name="q5" id="q5a" value="0" data-answer="Hands are more than 6 inches apart" required>
+                                <input type="radio" name="q5" id="q5a" value="0"
+                                    data-answer="Hands are more than 6 inches apart" required>
                                 <label for="q5a">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Hands are more than 6 inches apart</span>
@@ -704,7 +760,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q5" id="q5b" value="1" data-answer="Hands are 3–6 inches apart">
+                                <input type="radio" name="q5" id="q5b" value="1"
+                                    data-answer="Hands are 3–6 inches apart">
                                 <label for="q5b">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Hands are 3–6 inches apart</span>
@@ -720,7 +777,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q5" id="q5d" value="3" data-answer="Fingers can overlap/grip each other">
+                                <input type="radio" name="q5" id="q5d" value="3"
+                                    data-answer="Fingers can overlap/grip each other">
                                 <label for="q5d">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Fingers can overlap/grip each other</span>
@@ -731,10 +789,12 @@
                     </div>
 
                     <div class="question">
-                        <span class="question-label">6. Deep squat hold: Can you sit in a catcher's squat with heels flat?</span>
+                        <span class="question-label">6. Deep squat hold: Can you sit in a catcher's squat with heels
+                            flat?</span>
                         <div class="options">
                             <div class="option">
-                                <input type="radio" name="q6" id="q6a" value="0" data-answer="Heels lift off or fall backward" required>
+                                <input type="radio" name="q6" id="q6a" value="0"
+                                    data-answer="Heels lift off or fall backward" required>
                                 <label for="q6a">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Heels lift off or fall backward</span>
@@ -742,7 +802,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q6" id="q6b" value="1" data-answer="Can hold 15s (heels flat but tight)">
+                                <input type="radio" name="q6" id="q6b" value="1"
+                                    data-answer="Can hold 15s (heels flat but tight)">
                                 <label for="q6b">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Can hold 15s (heels flat but tight)</span>
@@ -750,7 +811,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q6" id="q6c" value="2" data-answer="Can hold comfortably for 60s">
+                                <input type="radio" name="q6" id="q6c" value="2"
+                                    data-answer="Can hold comfortably for 60s">
                                 <label for="q6c">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Can hold comfortably for 60s</span>
@@ -758,7 +820,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q6" id="q6d" value="3" data-answer="Can hold 3+ minutes comfortably">
+                                <input type="radio" name="q6" id="q6d" value="3"
+                                    data-answer="Can hold 3+ minutes comfortably">
                                 <label for="q6d">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Can hold 3+ minutes comfortably</span>
@@ -777,7 +840,8 @@
                     </div>
 
                     <div class="question">
-                        <span class="question-label">7. Single-leg stand: How long can you stand on one leg without touching anything?</span>
+                        <span class="question-label">7. Single-leg stand: How long can you stand on one leg without
+                            touching anything?</span>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" name="q7" id="q7a" value="0" data-answer="0 – 10 seconds" required>
@@ -804,7 +868,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q7" id="q7d" value="3" data-answer="60+ seconds (completely still)">
+                                <input type="radio" name="q7" id="q7d" value="3"
+                                    data-answer="60+ seconds (completely still)">
                                 <label for="q7d">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">60+ seconds (completely still)</span>
@@ -815,10 +880,12 @@
                     </div>
 
                     <div class="question">
-                        <span class="question-label">8. Tightrope walk: Walk 10 steps heel-to-toe in a straight line</span>
+                        <span class="question-label">8. Tightrope walk: Walk 10 steps heel-to-toe in a straight
+                            line</span>
                         <div class="options">
                             <div class="option">
-                                <input type="radio" name="q8" id="q8a" value="0" data-answer="Cannot complete 3 steps" required>
+                                <input type="radio" name="q8" id="q8a" value="0" data-answer="Cannot complete 3 steps"
+                                    required>
                                 <label for="q8a">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Cannot complete 3 steps</span>
@@ -826,7 +893,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q8" id="q8b" value="1" data-answer="10 steps but must wave arms for balance">
+                                <input type="radio" name="q8" id="q8b" value="1"
+                                    data-answer="10 steps but must wave arms for balance">
                                 <label for="q8b">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">10 steps but must wave arms for balance</span>
@@ -834,7 +902,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q8" id="q8c" value="2" data-answer="10 steps easily with hands on hips">
+                                <input type="radio" name="q8" id="q8c" value="2"
+                                    data-answer="10 steps easily with hands on hips">
                                 <label for="q8c">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">10 steps easily with hands on hips</span>
@@ -842,7 +911,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q8" id="q8d" value="3" data-answer="10 forward AND 10 backward with hands on hips">
+                                <input type="radio" name="q8" id="q8d" value="3"
+                                    data-answer="10 forward AND 10 backward with hands on hips">
                                 <label for="q8d">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">10 forward AND 10 backward with hands on hips</span>
@@ -853,10 +923,12 @@
                     </div>
 
                     <div class="question">
-                        <span class="question-label">9. Reverse lunge control: Can you perform controlled reverse lunges?</span>
+                        <span class="question-label">9. Reverse lunge control: Can you perform controlled reverse
+                            lunges?</span>
                         <div class="options">
                             <div class="option">
-                                <input type="radio" name="q9" id="q9a" value="0" data-answer="Must hold wall/chair to step back" required>
+                                <input type="radio" name="q9" id="q9a" value="0"
+                                    data-answer="Must hold wall/chair to step back" required>
                                 <label for="q9a">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Must hold wall/chair to step back</span>
@@ -864,7 +936,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q9" id="q9b" value="1" data-answer="No support but wobbles side-to-side">
+                                <input type="radio" name="q9" id="q9b" value="1"
+                                    data-answer="No support but wobbles side-to-side">
                                 <label for="q9b">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">No support but wobbles side-to-side</span>
@@ -872,7 +945,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q9" id="q9c" value="2" data-answer="Smooth movement, knee lightly touches floor">
+                                <input type="radio" name="q9" id="q9c" value="2"
+                                    data-answer="Smooth movement, knee lightly touches floor">
                                 <label for="q9c">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Smooth movement, knee lightly touches floor</span>
@@ -880,7 +954,8 @@
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q9" id="q9d" value="3" data-answer="Slow motion (3s down, 3s up) with zero wobble">
+                                <input type="radio" name="q9" id="q9d" value="3"
+                                    data-answer="Slow motion (3s down, 3s up) with zero wobble">
                                 <label for="q9d">
                                     <span class="option-indicator"></span>
                                     <span class="option-text">Slow motion (3s down, 3s up) with zero wobble</span>
@@ -934,7 +1009,7 @@
         // =====================================================
         // CONFIGURATION - UPDATE THIS WITH YOUR GOOGLE SCRIPT URL
         // =====================================================
-        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyKSv0QyXK8nnBqHm7g8CDfcCxeLp9D22PwJSDUEdO9I3GCYIo_i-msem7pXBXaORk/exec';
         // =====================================================
 
         const form = document.getElementById('assessmentForm');
@@ -953,11 +1028,11 @@
         function updateProgress() {
             const answered = document.querySelectorAll('input[type="radio"]:checked').length;
             const percent = Math.round((answered / totalQuestions) * 100);
-            
+
             progressFill.style.width = percent + '%';
             progressCount.textContent = `${answered} of ${totalQuestions} answered`;
             progressPercent.textContent = percent + '%';
-            
+
             const nameEntered = document.getElementById('clientName').value.trim() !== '';
             submitBtn.disabled = answered < totalQuestions || !nameEntered;
         }
@@ -996,9 +1071,9 @@
         }
 
         // Calculate results
-        form.addEventListener('submit', async function(e) {
+        form.addEventListener('submit', async function (e) {
             e.preventDefault();
-            
+
             // Show loading state
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
@@ -1026,7 +1101,7 @@
 
             // Determine level
             let level, levelClass, message;
-            
+
             if (totalScore <= 6) {
                 level = 'AMATEUR';
                 levelClass = 'amateur';
@@ -1059,14 +1134,14 @@
                 name: document.getElementById('clientName').value,
                 email: document.getElementById('clientEmail').value,
                 phone: document.getElementById('clientPhone').value,
-                
+
                 // Scores
                 totalScore: totalScore,
                 level: level,
                 enduranceScore: endurance,
                 flexibilityScore: flexibility,
                 balanceScore: balance,
-                
+
                 // Individual answers
                 q1_plank: getAnswerText('q1'),
                 q2_squats: getAnswerText('q2'),
@@ -1091,7 +1166,7 @@
                 document.getElementById('resultLevel').className = 'result-level ' + levelClass;
                 document.getElementById('resultScore').textContent = `Score: ${totalScore}/27`;
                 document.getElementById('resultMessage').textContent = message;
-                
+
                 document.getElementById('enduranceScore').textContent = `${endurance}/9 (${getCategoryLevel(endurance)})`;
                 document.getElementById('flexibilityScore').textContent = `${flexibility}/9 (${getCategoryLevel(flexibility)})`;
                 document.getElementById('balanceScore').textContent = `${balance}/9 (${getCategoryLevel(balance)})`;
@@ -1099,7 +1174,7 @@
                 // Show results
                 formContent.classList.add('hidden');
                 results.classList.add('show');
-                
+
                 // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
@@ -1110,7 +1185,7 @@
         });
 
         // Restart
-        restartBtn.addEventListener('click', function() {
+        restartBtn.addEventListener('click', function () {
             form.reset();
             formContent.classList.remove('hidden');
             results.classList.remove('show');
@@ -1120,4 +1195,5 @@
         });
     </script>
 </body>
+
 </html>
