@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --accent: #FF4D4D;
+            --accent-glow: rgba(255, 77, 77, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --border: #2a2a2a;
+            --amateur: #FF4D4D;
+            --beginner: #FF9F1C;
+            --semipro: #2EC4B6;
+            --pro: #9B5DE5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #FF8C42);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 2px;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), #FF8C42);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        /* Questions */
+        .question {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .question:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .question-label {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            position: relative;
+        }
+
+        .option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .option label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .option label:hover {
+            border-color: var(--text-secondary);
+            transform: translateX(5px);
+        }
+
+        .option input:checked + label {
+            border-color: var(--accent);
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        .option-indicator {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .option input:checked + label .option-indicator {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+
+        .option input:checked + label .option-indicator::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .option-text {
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .option-level {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+
+        .level-amateur { background: rgba(255, 77, 77, 0.2); color: var(--amateur); }
+        .level-beginner { background: rgba(255, 159, 28, 0.2); color: var(--beginner); }
+        .level-semipro { background: rgba(46, 196, 182, 0.2); color: var(--semipro); }
+        .level-pro { background: rgba(155, 93, 229, 0.2); color: var(--pro); }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 20px 40px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--accent), #FF8C42);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .submit-btn.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .submit-btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            top: 50%;
+            left: 50%;
+            margin-left: -12px;
+            margin-top: -12px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Results */
+        .results {
+            display: none;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .result-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 24px;
+            padding: 50px 30px;
+            margin-bottom: 30px;
+        }
+
+        .result-level {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 12vw, 5rem);
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .result-level.amateur { color: var(--amateur); }
+        .result-level.beginner { color: var(--beginner); }
+        .result-level.semipro { color: var(--semipro); }
+        .result-level.pro { color: var(--pro); }
+
+        .result-score {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .result-message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Breakdown */
+        .breakdown {
+            margin-top: 40px;
+        }
+
+        .breakdown h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            color: var(--text-secondary);
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .breakdown-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 15px;
+            text-align: center;
+        }
+
+        .breakdown-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .breakdown-item .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .breakdown-item .value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        .restart-btn {
+            margin-top: 40px;
+            padding: 15px 40px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Client Info */
+        .client-info {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .input-group input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+            font-size: 0.95rem;
+        }
+
+        .status-message.success {
+            display: block;
+            background: rgba(46, 196, 182, 0.15);
+            border: 1px solid var(--semipro);
+            color: var(--semipro);
+        }
+
+        .status-message.error {
+            display: block;
+            background: rgba(255, 77, 77, 0.15);
+            border: 1px solid var(--amateur);
+            color: var(--amateur);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .breakdown-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .option label {
+                padding: 12px 15px;
+            }
+
+            .option-level {
+                font-size: 0.65rem;
+                padding: 3px 8px;
+            }
+        }
+
+        /* Hide form when showing results */
+        .form-content.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Fitness Assessment</h1>
+            <p>Answer 9 questions to discover your fitness level</p>
+        </header>
+
+        <div class="form-content">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="progressCount">0 of 9 answered</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+            </div>
+
+            <div class="client-info">
+                <div class="input-group">
+                    <label for="clientName">Your Name *</label>
+                    <input type="text" id="clientName" placeholder="Enter your name" required>
+                </div>
+                <div class="input-group">
+                    <label for="clientEmail">Email (optional)</label>
+                    <input type="email" id="clientEmail" placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="clientPhone">Phone (optional)</label>
+                    <input type="tel" id="clientPhone" placeholder="Enter your phone number">
+                </div>
+            </div>
+
+            <form id="assessmentForm">
+                <!-- ENDURANCE SECTION -->
+                <div class="section" style="animation-delay: 0.1s;">
+                    <div class="section-header">
+                        <div class="section-icon">⚡</div>
+                        <h2 class="section-title">Endurance</h2>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-label">1. How long can you hold a strict forearm plank?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q1" id="q1a" value="0" data-answer="0 – 45 seconds" required>
+                                <label for="q1a">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">0 – 45 seconds</span>
+                                    <span class="option-level level-amateur">Amateur</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1" id="q1b" value="1" data-answer="45 seconds – 1.5 minutes">
+                                <label for="q1b">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">45 seconds – 1.5 minutes</span>
+                                    <span class="option-level level-beginner">Beginner</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1" id="q1c" value="2" data-answer="1.5 – 3 minutes">
+                                <label for="q1c">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">1.5 – 3 minutes</span>
+                                    <span class="option-level level-semipro">Semi-Pro</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1" id="q1d" value="3" data-answer="3 minutes +">
+                                <label for="q1d">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">3 minutes +</span>
+                                    <span class="option-level level-pro">Pro</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-label">2. How many bodyweight squats can you do in 60 seconds?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q2" id="q2a" value="0" data-answer="0 – 15 reps" required>
+                                <label for="q2a">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">0 – 15 reps</span>
+                                    <span class="option-level level-amateur">Amateur</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2" id="q2b" value="1" data-answer="15 – 30 reps">
+                                <label for="q2b">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">15 – 30 reps</span>
+                                    <span class="option-level level-beginner">Beginner</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2" id="q2c" value="2" data-answer="30 – 50 reps">
+                                <label for="q2c">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">30 – 50 reps</span>
+                                    <span class="option-level level-semipro">Semi-Pro</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2" id="q2d" value="3" data-answer="50+ reps">
+                                <label for="q2d">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">50+ reps</span>
+                                    <span class="option-level level-pro">Pro</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-label">3. How many full burpees can you do in 60 seconds?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q3" id="q3a" value="0" data-answer="0 – 5 reps" required>
+                                <label for="q3a">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">0 – 5 reps</span>
+                                    <span class="option-level level-amateur">Amateur</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q3" id="q3b" value="1" data-answer="5 – 12 reps">
+                                <label for="q3b">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">5 – 12 reps</span>
+                                    <span class="option-level level-beginner">Beginner</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q3" id="q3c" value="2" data-answer="12 – 20 reps">
+                                <label for="q3c">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">12 – 20 reps</span>
+                                    <span class="option-level level-semipro">Semi-Pro</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q3" id="q3d" value="3" data-answer="20+ reps">
+                                <label for="q3d">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">20+ reps</span>
+                                    <span class="option-level level-pro">Pro</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FLEXIBILITY SECTION -->
+                <div class="section" style="animation-delay: 0.2s;">
+                    <div class="section-header">
+                        <div class="section-icon">🧘</div>
+                        <h2 class="section-title">Flexibility</h2>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-label">4. Standing with legs straight, how far can you reach down?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q4" id="q4a" value="0" data-answer="Cannot reach past knees" required>
+                                <label for="q4a">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Cannot reach past knees</span>
+                                    <span class="option-level level-amateur">Amateur</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q4" id="q4b" value="1" data-answer="Can touch shins/ankles">
+                                <label for="q4b">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Can touch shins/ankles</span>
+                                    <span class="option-level level-beginner">Beginner</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q4" id="q4c" value="2" data-answer="Can touch toes with fingertips">
+                                <label for="q4c">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Can touch toes with fingertips</span>
+                                    <span class="option-level level-semipro">Semi-Pro</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q4" id="q4d" value="3" data-answer="Can put palms flat on the floor">
+                                <label for="q4d">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Can put palms flat on the floor</span>
+                                    <span class="option-level level-pro">Pro</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-label">5. Shoulder reach test: One arm over shoulder, one behind back—can your fingers touch?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q5" id="q5a" value="0" data-answer="Hands are more than 6 inches apart" required>
+                                <label for="q5a">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Hands are more than 6 inches apart</span>
+                                    <span class="option-level level-amateur">Amateur</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q5" id="q5b" value="1" data-answer="Hands are 3–6 inches apart">
+                                <label for="q5b">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Hands are 3–6 inches apart</span>
+                                    <span class="option-level level-beginner">Beginner</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q5" id="q5c" value="2" data-answer="Fingertips can touch">
+                                <label for="q5c">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Fingertips can touch</span>
+                                    <span class="option-level level-semipro">Semi-Pro</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q5" id="q5d" value="3" data-answer="Fingers can overlap/grip each other">
+                                <label for="q5d">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Fingers can overlap/grip each other</span>
+                                    <span class="option-level level-pro">Pro</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-label">6. Deep squat hold: Can you sit in a catcher's squat with heels flat?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q6" id="q6a" value="0" data-answer="Heels lift off or fall backward" required>
+                                <label for="q6a">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Heels lift off or fall backward</span>
+                                    <span class="option-level level-amateur">Amateur</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q6" id="q6b" value="1" data-answer="Can hold 15s (heels flat but tight)">
+                                <label for="q6b">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Can hold 15s (heels flat but tight)</span>
+                                    <span class="option-level level-beginner">Beginner</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q6" id="q6c" value="2" data-answer="Can hold comfortably for 60s">
+                                <label for="q6c">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Can hold comfortably for 60s</span>
+                                    <span class="option-level level-semipro">Semi-Pro</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q6" id="q6d" value="3" data-answer="Can hold 3+ minutes comfortably">
+                                <label for="q6d">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Can hold 3+ minutes comfortably</span>
+                                    <span class="option-level level-pro">Pro</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BALANCE SECTION -->
+                <div class="section" style="animation-delay: 0.3s;">
+                    <div class="section-header">
+                        <div class="section-icon">⚖️</div>
+                        <h2 class="section-title">Balance & Stability</h2>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-label">7. Single-leg stand: How long can you stand on one leg without touching anything?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q7" id="q7a" value="0" data-answer="0 – 10 seconds" required>
+                                <label for="q7a">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">0 – 10 seconds</span>
+                                    <span class="option-level level-amateur">Amateur</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q7" id="q7b" value="1" data-answer="10 – 30 seconds">
+                                <label for="q7b">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">10 – 30 seconds</span>
+                                    <span class="option-level level-beginner">Beginner</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q7" id="q7c" value="2" data-answer="30 – 60 seconds">
+                                <label for="q7c">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">30 – 60 seconds</span>
+                                    <span class="option-level level-semipro">Semi-Pro</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q7" id="q7d" value="3" data-answer="60+ seconds (completely still)">
+                                <label for="q7d">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">60+ seconds (completely still)</span>
+                                    <span class="option-level level-pro">Pro</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-label">8. Tightrope walk: Walk 10 steps heel-to-toe in a straight line</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q8" id="q8a" value="0" data-answer="Cannot complete 3 steps" required>
+                                <label for="q8a">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Cannot complete 3 steps</span>
+                                    <span class="option-level level-amateur">Amateur</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q8" id="q8b" value="1" data-answer="10 steps but must wave arms for balance">
+                                <label for="q8b">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">10 steps but must wave arms for balance</span>
+                                    <span class="option-level level-beginner">Beginner</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q8" id="q8c" value="2" data-answer="10 steps easily with hands on hips">
+                                <label for="q8c">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">10 steps easily with hands on hips</span>
+                                    <span class="option-level level-semipro">Semi-Pro</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q8" id="q8d" value="3" data-answer="10 forward AND 10 backward with hands on hips">
+                                <label for="q8d">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">10 forward AND 10 backward with hands on hips</span>
+                                    <span class="option-level level-pro">Pro</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-label">9. Reverse lunge control: Can you perform controlled reverse lunges?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q9" id="q9a" value="0" data-answer="Must hold wall/chair to step back" required>
+                                <label for="q9a">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Must hold wall/chair to step back</span>
+                                    <span class="option-level level-amateur">Amateur</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q9" id="q9b" value="1" data-answer="No support but wobbles side-to-side">
+                                <label for="q9b">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">No support but wobbles side-to-side</span>
+                                    <span class="option-level level-beginner">Beginner</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q9" id="q9c" value="2" data-answer="Smooth movement, knee lightly touches floor">
+                                <label for="q9c">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Smooth movement, knee lightly touches floor</span>
+                                    <span class="option-level level-semipro">Semi-Pro</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q9" id="q9d" value="3" data-answer="Slow motion (3s down, 3s up) with zero wobble">
+                                <label for="q9d">
+                                    <span class="option-indicator"></span>
+                                    <span class="option-text">Slow motion (3s down, 3s up) with zero wobble</span>
+                                    <span class="option-level level-pro">Pro</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn" disabled>Get My Results</button>
+                <div class="status-message" id="statusMessage"></div>
+            </form>
+        </div>
+
+        <div class="results" id="results">
+            <div class="result-card">
+                <div class="result-level" id="resultLevel">BEGINNER</div>
+                <div class="result-score" id="resultScore">Score: 12/27</div>
+                <div class="result-message" id="resultMessage">
+                    You have potential, but your foundation needs work.
+                </div>
+            </div>
+
+            <div class="breakdown">
+                <h3>Category Breakdown</h3>
+                <div class="breakdown-grid">
+                    <div class="breakdown-item">
+                        <div class="icon">⚡</div>
+                        <div class="label">Endurance</div>
+                        <div class="value" id="enduranceScore">-</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="icon">🧘</div>
+                        <div class="label">Flexibility</div>
+                        <div class="value" id="flexibilityScore">-</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="icon">⚖️</div>
+                        <div class="label">Balance</div>
+                        <div class="value" id="balanceScore">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="restart-btn" id="restartBtn">Take Assessment Again</button>
+        </div>
+    </div>
+
+    <script>
+        // =====================================================
+        // CONFIGURATION - UPDATE THIS WITH YOUR GOOGLE SCRIPT URL
+        // =====================================================
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+        // =====================================================
+
+        const form = document.getElementById('assessmentForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressCount = document.getElementById('progressCount');
+        const progressPercent = document.getElementById('progressPercent');
+        const formContent = document.querySelector('.form-content');
+        const results = document.getElementById('results');
+        const restartBtn = document.getElementById('restartBtn');
+        const statusMessage = document.getElementById('statusMessage');
+
+        const totalQuestions = 9;
+
+        // Track progress
+        function updateProgress() {
+            const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+            const percent = Math.round((answered / totalQuestions) * 100);
+            
+            progressFill.style.width = percent + '%';
+            progressCount.textContent = `${answered} of ${totalQuestions} answered`;
+            progressPercent.textContent = percent + '%';
+            
+            const nameEntered = document.getElementById('clientName').value.trim() !== '';
+            submitBtn.disabled = answered < totalQuestions || !nameEntered;
+        }
+
+        // Listen for changes
+        form.addEventListener('change', updateProgress);
+        document.getElementById('clientName').addEventListener('input', updateProgress);
+
+        // Get selected answer text
+        function getAnswerText(questionName) {
+            const selected = document.querySelector(`input[name="${questionName}"]:checked`);
+            return selected ? selected.dataset.answer : '';
+        }
+
+        // Send data to Google Sheets
+        async function sendToGoogleSheets(data) {
+            if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+                console.log('Google Sheets not configured. Data:', data);
+                return { success: true, message: 'Data logged (Sheets not configured)' };
+            }
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                return { success: true };
+            } catch (error) {
+                console.error('Error sending to Google Sheets:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Calculate results
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            statusMessage.className = 'status-message';
+            statusMessage.textContent = '';
+
+            const formData = new FormData(form);
+            let totalScore = 0;
+            let endurance = 0;
+            let flexibility = 0;
+            let balance = 0;
+
+            // Calculate scores
+            for (let i = 1; i <= 3; i++) {
+                endurance += parseInt(formData.get(`q${i}`));
+            }
+            for (let i = 4; i <= 6; i++) {
+                flexibility += parseInt(formData.get(`q${i}`));
+            }
+            for (let i = 7; i <= 9; i++) {
+                balance += parseInt(formData.get(`q${i}`));
+            }
+
+            totalScore = endurance + flexibility + balance;
+
+            // Determine level
+            let level, levelClass, message;
+            
+            if (totalScore <= 6) {
+                level = 'AMATEUR';
+                levelClass = 'amateur';
+                message = "Your body is in \"Survival Mode.\" If you don't start moving, in 6 months you will experience chronic fatigue, weight gain, and joint stiffness. But don't worry—with the right plan, you can transform completely.";
+            } else if (totalScore <= 13) {
+                level = 'BEGINNER';
+                levelClass = 'beginner';
+                message = "You have potential, but your foundation is weak. You are one \"wrong move\" away from an injury. Let's build a solid base and get you moving safely toward your goals.";
+            } else if (totalScore <= 20) {
+                level = 'SEMI-PRO';
+                levelClass = 'semipro';
+                message = "You are fit! Now you need a specific plan to reach peak performance. With targeted training, you can break through to the next level.";
+            } else {
+                level = 'PRO';
+                levelClass = 'pro';
+                message = "You are an elite mover. Let's keep you here for the next 20 years. Maintenance, recovery, and progressive challenges will be key to your longevity.";
+            }
+
+            // Helper function to get level text
+            function getCategoryLevel(score) {
+                if (score <= 2) return 'Amateur';
+                if (score <= 5) return 'Beginner';
+                if (score <= 7) return 'Semi-Pro';
+                return 'Pro';
+            }
+
+            // Prepare data for Google Sheets
+            const clientData = {
+                timestamp: new Date().toISOString(),
+                name: document.getElementById('clientName').value,
+                email: document.getElementById('clientEmail').value,
+                phone: document.getElementById('clientPhone').value,
+                
+                // Scores
+                totalScore: totalScore,
+                level: level,
+                enduranceScore: endurance,
+                flexibilityScore: flexibility,
+                balanceScore: balance,
+                
+                // Individual answers
+                q1_plank: getAnswerText('q1'),
+                q2_squats: getAnswerText('q2'),
+                q3_burpees: getAnswerText('q3'),
+                q4_toeTouch: getAnswerText('q4'),
+                q5_shoulder: getAnswerText('q5'),
+                q6_deepSquat: getAnswerText('q6'),
+                q7_singleLeg: getAnswerText('q7'),
+                q8_tightrope: getAnswerText('q8'),
+                q9_lunge: getAnswerText('q9')
+            };
+
+            // Send to Google Sheets
+            const result = await sendToGoogleSheets(clientData);
+
+            // Remove loading state
+            submitBtn.classList.remove('loading');
+
+            if (result.success) {
+                // Update results UI
+                document.getElementById('resultLevel').textContent = level;
+                document.getElementById('resultLevel').className = 'result-level ' + levelClass;
+                document.getElementById('resultScore').textContent = `Score: ${totalScore}/27`;
+                document.getElementById('resultMessage').textContent = message;
+                
+                document.getElementById('enduranceScore').textContent = `${endurance}/9 (${getCategoryLevel(endurance)})`;
+                document.getElementById('flexibilityScore').textContent = `${flexibility}/9 (${getCategoryLevel(flexibility)})`;
+                document.getElementById('balanceScore').textContent = `${balance}/9 (${getCategoryLevel(balance)})`;
+
+                // Show results
+                formContent.classList.add('hidden');
+                results.classList.add('show');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                statusMessage.className = 'status-message error';
+                statusMessage.textContent = 'There was an error saving your results. Please try again.';
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Restart
+        restartBtn.addEventListener('click', function() {
+            form.reset();
+            formContent.classList.remove('hidden');
+            results.classList.remove('show');
+            statusMessage.className = 'status-message';
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
