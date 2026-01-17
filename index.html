@@ -620,12 +620,8 @@
                     <input type="text" id="clientName" placeholder="Enter your name" required>
                 </div>
                 <div class="input-group">
-                    <label for="clientEmail">Email (optional)</label>
-                    <input type="email" id="clientEmail" placeholder="Enter your email">
-                </div>
-                <div class="input-group">
-                    <label for="clientPhone">Phone (optional)</label>
-                    <input type="tel" id="clientPhone" placeholder="Enter your phone number">
+                    <label for="clientContact">Phone or Email *</label>
+                    <input type="text" id="clientContact" placeholder="Enter your phone number or email" required>
                 </div>
             </div>
 
@@ -1093,12 +1089,14 @@
             progressPercent.textContent = percent + '%';
 
             const nameEntered = document.getElementById('clientName').value.trim() !== '';
-            submitBtn.disabled = answered < totalQuestions || !nameEntered;
+            const contactEntered = document.getElementById('clientContact').value.trim() !== '';
+            submitBtn.disabled = answered < totalQuestions || !nameEntered || !contactEntered;
         }
 
         // Listen for changes
         form.addEventListener('change', updateProgress);
         document.getElementById('clientName').addEventListener('input', updateProgress);
+        document.getElementById('clientContact').addEventListener('input', updateProgress);
 
         // Get selected answer text
         function getAnswerText(questionName) {
@@ -1191,8 +1189,7 @@
             const clientData = {
                 timestamp: new Date().toISOString(),
                 name: document.getElementById('clientName').value,
-                email: document.getElementById('clientEmail').value,
-                phone: document.getElementById('clientPhone').value,
+                contact: document.getElementById('clientContact').value,
 
                 // Scores
                 totalScore: totalScore,
