@@ -4,23 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Assessment</title>
+    <title>Fitness Assessment | Lyfstyle Coach</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+Pro:wght@400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0a0a0a;
-            --bg-card: #141414;
-            --accent: #FF4D4D;
-            --accent-glow: rgba(255, 77, 77, 0.3);
+            --bg-dark: #000000;
+            --bg-card: #0a0f1a;
+            --primary: #1e3a5f;
+            --primary-light: #2d4a6f;
+            --accent: #5ba4d4;
+            --accent-light: #7ec8e3;
+            --accent-glow: rgba(91, 164, 212, 0.3);
             --text-primary: #ffffff;
-            --text-secondary: #888888;
-            --border: #2a2a2a;
-            --amateur: #FF4D4D;
-            --beginner: #FF9F1C;
-            --semipro: #2EC4B6;
-            --pro: #9B5DE5;
+            --text-secondary: #8a9bb5;
+            --border: #1e3a5f;
+            --amateur: #e74c3c;
+            --beginner: #f39c12;
+            --semipro: #5ba4d4;
+            --pro: #9b59b6;
         }
 
         * {
@@ -30,7 +34,7 @@
         }
 
         body {
-            font-family: 'Source Sans Pro', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             background: var(--bg-dark);
             color: var(--text-primary);
             min-height: 100vh;
@@ -43,17 +47,24 @@
             padding: 40px 20px;
         }
 
-        /* Header */
+        /* Header with Logo */
         .header {
             text-align: center;
             margin-bottom: 50px;
             animation: fadeInDown 0.8s ease-out;
         }
 
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
         .header h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            letter-spacing: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 7vw, 3rem);
+            font-weight: 800;
+            letter-spacing: 2px;
             margin-bottom: 10px;
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
             -webkit-background-clip: text;
@@ -64,6 +75,14 @@
         .header p {
             color: var(--text-secondary);
             font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .tagline {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-top: 5px;
+            letter-spacing: 1px;
         }
 
         /* Progress Bar */
@@ -81,7 +100,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent), #FF8C42);
+            background: linear-gradient(90deg, var(--primary), var(--accent));
             width: 0%;
             transition: width 0.5s ease;
             border-radius: 2px;
@@ -113,7 +132,7 @@
         .section-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--accent), #FF8C42);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -122,9 +141,11 @@
         }
 
         .section-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--accent-light);
         }
 
         /* Questions */
@@ -178,13 +199,13 @@
         }
 
         .option label:hover {
-            border-color: var(--text-secondary);
+            border-color: var(--accent);
             transform: translateX(5px);
         }
 
         .option input:checked+label {
             border-color: var(--accent);
-            background: rgba(255, 77, 77, 0.1);
+            background: rgba(91, 164, 212, 0.1);
         }
 
         .option-indicator {
@@ -228,22 +249,22 @@
         }
 
         .level-amateur {
-            background: rgba(255, 77, 77, 0.2);
+            background: rgba(231, 76, 60, 0.2);
             color: var(--amateur);
         }
 
         .level-beginner {
-            background: rgba(255, 159, 28, 0.2);
+            background: rgba(243, 156, 18, 0.2);
             color: var(--beginner);
         }
 
         .level-semipro {
-            background: rgba(46, 196, 182, 0.2);
+            background: rgba(91, 164, 212, 0.2);
             color: var(--semipro);
         }
 
         .level-pro {
-            background: rgba(155, 93, 229, 0.2);
+            background: rgba(155, 89, 182, 0.2);
             color: var(--pro);
         }
 
@@ -251,16 +272,18 @@
         .submit-btn {
             width: 100%;
             padding: 20px 40px;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 3px;
-            background: linear-gradient(135deg, var(--accent), #FF8C42);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
             border: none;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 20px;
+            text-transform: uppercase;
         }
 
         .submit-btn:hover {
@@ -312,6 +335,11 @@
             display: block;
         }
 
+        .results .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
         .result-card {
             background: var(--bg-card);
             border: 2px solid var(--border);
@@ -321,9 +349,10 @@
         }
 
         .result-level {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(3rem, 12vw, 5rem);
-            letter-spacing: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 10vw, 4rem);
+            font-weight: 800;
+            letter-spacing: 3px;
             margin-bottom: 10px;
         }
 
@@ -363,9 +392,10 @@
         }
 
         .breakdown h3 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             margin-bottom: 25px;
             color: var(--text-secondary);
         }
@@ -398,17 +428,20 @@
         }
 
         .breakdown-item .value {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.3rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
             letter-spacing: 1px;
+            color: var(--accent-light);
         }
 
         .restart-btn {
             margin-top: 40px;
             padding: 15px 40px;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
             background: transparent;
             color: var(--text-primary);
             border: 2px solid var(--border);
@@ -472,16 +505,31 @@
 
         .status-message.success {
             display: block;
-            background: rgba(46, 196, 182, 0.15);
-            border: 1px solid var(--semipro);
-            color: var(--semipro);
+            background: rgba(91, 164, 212, 0.15);
+            border: 1px solid var(--accent);
+            color: var(--accent);
         }
 
         .status-message.error {
             display: block;
-            background: rgba(255, 77, 77, 0.15);
+            background: rgba(231, 76, 60, 0.15);
             border: 1px solid var(--amateur);
             color: var(--amateur);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
         }
 
         /* Animations */
@@ -533,6 +581,10 @@
                 font-size: 0.65rem;
                 padding: 3px 8px;
             }
+
+            .logo {
+                max-width: 150px;
+            }
         }
 
         /* Hide form when showing results */
@@ -545,8 +597,10 @@
 <body>
     <div class="container">
         <header class="header">
+            <img src="logo.png" alt="Lyfstyle Coach" class="logo">
             <h1>Fitness Assessment</h1>
             <p>Answer 9 questions to discover your fitness level</p>
+            <div class="tagline">Train Life. Not Just Body.</div>
         </header>
 
         <div class="form-content">
@@ -972,6 +1026,7 @@
         </div>
 
         <div class="results" id="results">
+            <img src="logo.png" alt="Lyfstyle Coach" class="logo">
             <div class="result-card">
                 <div class="result-level" id="resultLevel">BEGINNER</div>
                 <div class="result-score" id="resultScore">Score: 12/27</div>
@@ -1003,13 +1058,17 @@
 
             <button class="restart-btn" id="restartBtn">Take Assessment Again</button>
         </div>
+
+        <footer class="footer">
+            <p>© 2025 Lyfstyle Coach · Train Life. Not Just Body.</p>
+        </footer>
     </div>
 
     <script>
         // =====================================================
         // CONFIGURATION - UPDATE THIS WITH YOUR GOOGLE SCRIPT URL
         // =====================================================
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyKSv0QyXK8nnBqHm7g8CDfcCxeLp9D22PwJSDUEdO9I3GCYIo_i-msem7pXBXaORk/exec';
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
         // =====================================================
 
         const form = document.getElementById('assessmentForm');
