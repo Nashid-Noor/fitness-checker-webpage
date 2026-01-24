@@ -379,11 +379,17 @@
         }
 
         .result-message {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1rem;
+            line-height: 1.9;
             color: var(--text-primary);
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto;
+            text-align: left;
+            white-space: pre-line;
+        }
+
+        .result-message strong {
+            color: var(--accent-light);
         }
 
         /* Breakdown */
@@ -453,6 +459,99 @@
         .restart-btn:hover {
             border-color: var(--accent);
             color: var(--accent);
+        }
+
+        /* Customised Plan CTA */
+        .custom-plan-cta {
+            background: linear-gradient(145deg, var(--primary), var(--primary-light));
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-top: 40px;
+            text-align: center;
+            border: 1px solid rgba(91, 164, 212, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .cta-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-plan-cta h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .custom-plan-cta p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 400px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 18px 30px;
+            background: var(--bg-dark);
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            background: #0a0f1a;
+        }
+
+        .cta-btn .btn-icon {
+            font-size: 1.3rem;
+        }
+
+        @media (max-width: 600px) {
+            .custom-plan-cta {
+                padding: 30px 20px;
+            }
+
+            .custom-plan-cta h3 {
+                font-size: 1.3rem;
+            }
+
+            .cta-btn {
+                padding: 15px 20px;
+                font-size: 0.95rem;
+            }
         }
 
         /* Client Info */
@@ -637,34 +736,34 @@
                         <span class="question-label">1. How long can you hold a strict forearm plank?</span>
                         <div class="options">
                             <div class="option">
-                                <input type="radio" name="q1" id="q1a" value="0" data-answer="0 – 45 seconds" required>
+                                <input type="radio" name="q1" id="q1a" value="0" data-answer="0 – 1.5 mins" required>
                                 <label for="q1a">
                                     <span class="option-indicator"></span>
-                                    <span class="option-text">0 – 45 seconds</span>
+                                    <span class="option-text">0 – 1.5 mins</span>
                                     <span class="option-level level-amateur">Amateur</span>
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q1" id="q1b" value="1" data-answer="45 seconds – 1.5 minutes">
+                                <input type="radio" name="q1" id="q1b" value="1" data-answer="1.5 – 3 minutes">
                                 <label for="q1b">
                                     <span class="option-indicator"></span>
-                                    <span class="option-text">45 seconds – 1.5 minutes</span>
+                                    <span class="option-text">1.5 – 3 minutes</span>
                                     <span class="option-level level-beginner">Beginner</span>
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q1" id="q1c" value="2" data-answer="1.5 – 3 minutes">
+                                <input type="radio" name="q1" id="q1c" value="2" data-answer="3 – 5 minutes">
                                 <label for="q1c">
                                     <span class="option-indicator"></span>
-                                    <span class="option-text">1.5 – 3 minutes</span>
+                                    <span class="option-text">3 – 5 minutes</span>
                                     <span class="option-level level-semipro">Semi-Pro</span>
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q1" id="q1d" value="3" data-answer="3 minutes +">
+                                <input type="radio" name="q1" id="q1d" value="3" data-answer="5+ minutes">
                                 <label for="q1d">
                                     <span class="option-indicator"></span>
-                                    <span class="option-text">3 minutes +</span>
+                                    <span class="option-text">5+ minutes</span>
                                     <span class="option-level level-pro">Pro</span>
                                 </label>
                             </div>
@@ -675,26 +774,26 @@
                         <span class="question-label">2. How many bodyweight squats can you do in 60 seconds?</span>
                         <div class="options">
                             <div class="option">
-                                <input type="radio" name="q2" id="q2a" value="0" data-answer="0 – 15 reps" required>
+                                <input type="radio" name="q2" id="q2a" value="0" data-answer="0 – 25 reps" required>
                                 <label for="q2a">
                                     <span class="option-indicator"></span>
-                                    <span class="option-text">0 – 15 reps</span>
+                                    <span class="option-text">0 – 25 reps</span>
                                     <span class="option-level level-amateur">Amateur</span>
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q2" id="q2b" value="1" data-answer="15 – 30 reps">
+                                <input type="radio" name="q2" id="q2b" value="1" data-answer="26 – 40 reps">
                                 <label for="q2b">
                                     <span class="option-indicator"></span>
-                                    <span class="option-text">15 – 30 reps</span>
+                                    <span class="option-text">26 – 40 reps</span>
                                     <span class="option-level level-beginner">Beginner</span>
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q2" id="q2c" value="2" data-answer="30 – 50 reps">
+                                <input type="radio" name="q2" id="q2c" value="2" data-answer="40 – 50 reps">
                                 <label for="q2c">
                                     <span class="option-indicator"></span>
-                                    <span class="option-text">30 – 50 reps</span>
+                                    <span class="option-text">40 – 50 reps</span>
                                     <span class="option-level level-semipro">Semi-Pro</span>
                                 </label>
                             </div>
@@ -713,34 +812,34 @@
                         <span class="question-label">3. How many full burpees can you do in 60 seconds?</span>
                         <div class="options">
                             <div class="option">
-                                <input type="radio" name="q3" id="q3a" value="0" data-answer="0 – 5 reps" required>
+                                <input type="radio" name="q3" id="q3a" value="0" data-answer="0 – 10 reps" required>
                                 <label for="q3a">
                                     <span class="option-indicator"></span>
-                                    <span class="option-text">0 – 5 reps</span>
+                                    <span class="option-text">0 – 10 reps</span>
                                     <span class="option-level level-amateur">Amateur</span>
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q3" id="q3b" value="1" data-answer="5 – 12 reps">
+                                <input type="radio" name="q3" id="q3b" value="1" data-answer="11 – 20 reps">
                                 <label for="q3b">
                                     <span class="option-indicator"></span>
-                                    <span class="option-text">5 – 12 reps</span>
+                                    <span class="option-text">11 – 20 reps</span>
                                     <span class="option-level level-beginner">Beginner</span>
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q3" id="q3c" value="2" data-answer="12 – 20 reps">
+                                <input type="radio" name="q3" id="q3c" value="2" data-answer="21 – 30 reps">
                                 <label for="q3c">
                                     <span class="option-indicator"></span>
-                                    <span class="option-text">12 – 20 reps</span>
+                                    <span class="option-text">21 – 30 reps</span>
                                     <span class="option-level level-semipro">Semi-Pro</span>
                                 </label>
                             </div>
                             <div class="option">
-                                <input type="radio" name="q3" id="q3d" value="3" data-answer="20+ reps">
+                                <input type="radio" name="q3" id="q3d" value="3" data-answer="30+ reps">
                                 <label for="q3d">
                                     <span class="option-indicator"></span>
-                                    <span class="option-text">20+ reps</span>
+                                    <span class="option-text">30+ reps</span>
                                     <span class="option-level level-pro">Pro</span>
                                 </label>
                             </div>
@@ -890,8 +989,8 @@
                     </div>
 
                     <div class="question">
-                        <span class="question-label">7. Single-leg stand: How long can you stand on one leg without
-                            touching anything?</span>
+                        <span class="question-label">7. Single-leg stand: Raise both hands overhead, stand on one leg,
+                            raise your heel and hold. How long?</span>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" name="q7" id="q7a" value="0" data-answer="0 – 10 seconds" required>
@@ -1052,6 +1151,23 @@
                 </div>
             </div>
 
+            <!-- Customised Plan CTA -->
+            <div class="custom-plan-cta">
+                <div class="cta-icon">💬</div>
+                <h3>Want a Customised Plan?</h3>
+                <p>Get personalised training programs tailored to your goals and fitness level.</p>
+                <div class="cta-buttons">
+                    <a href="tel:0562964102" class="cta-btn">
+                        <span class="btn-icon">📱</span>
+                        <span>0562964102</span>
+                    </a>
+                    <a href="mailto:Waseemoden369@gmail.com" class="cta-btn">
+                        <span class="btn-icon">✉️</span>
+                        <span>Waseemoden369@gmail.com</span>
+                    </a>
+                </div>
+            </div>
+
             <button class="restart-btn" id="restartBtn">Take Assessment Again</button>
         </div>
 
@@ -1064,7 +1180,7 @@
         // =====================================================
         // CONFIGURATION - UPDATE THIS WITH YOUR GOOGLE SCRIPT URL
         // =====================================================
-        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKpORkqblQP9uB2pYRxI_11IQzNg4_-weMuuw7Xv8okAFiy1MuKh6FirR30Rrgs8wt/exec';
         // =====================================================
 
         const form = document.getElementById('assessmentForm');
@@ -1162,19 +1278,64 @@
             if (totalScore <= 6) {
                 level = 'AMATEUR';
                 levelClass = 'amateur';
-                message = "Your body is in \"Survival Mode.\" If you don't start moving, in 6 months you will experience chronic fatigue, weight gain, and joint stiffness. But don't worry—with the right plan, you can transform completely.";
+                message = `<strong>Reality check:</strong> Your body is in survival mode. Energy is low, joints are stiff, and fat gain is coming fast if nothing changes.
+
+<strong>What you should NOT do:</strong>
+❌ Random gym workouts
+❌ YouTube workouts without assessment
+
+<strong>Best next move:</strong>
+✅ Guided Online Video Training (Beginner Foundation Program) – Simple movements, joint-friendly, fat loss + mobility focus
+
+<strong>If you want faster results:</strong>
+➡️ 1-to-1 Personal Training (Gym or Online)
+
+👉 This phase is about learning how to move again.`;
             } else if (totalScore <= 13) {
                 level = 'BEGINNER';
                 levelClass = 'beginner';
-                message = "You have potential, but your foundation is weak. You are one \"wrong move\" away from an injury. Let's build a solid base and get you moving safely toward your goals.";
+                message = `<strong>Reality check:</strong> You have potential, but your foundation is weak. One bad form mistake = injury.
+
+<strong>What you should NOT do:</strong>
+❌ Copy advanced workouts
+❌ Train without structure
+
+<strong>Best next move:</strong>
+✅ Structured Program Card + Animated Exercise Videos – Proper form, progressive overload, safe muscle building
+
+<strong>Upgrade option:</strong>
+➡️ Online Coaching with Weekly Check-ins
+
+👉 This phase is about building a strong base.`;
             } else if (totalScore <= 20) {
                 level = 'SEMI-PRO';
                 levelClass = 'semipro';
-                message = "You are fit! Now you need a specific plan to reach peak performance. With targeted training, you can break through to the next level.";
+                message = `<strong>Reality check:</strong> You're fit. Now randomness will hold you back.
+
+<strong>What you should NOT do:</strong>
+❌ "I'll just do what feels good today" training
+
+<strong>Best next move:</strong>
+✅ Performance-Based Program Card – Volume & intensity matched to your capacity, clear weekly structure, gym-independent confidence
+
+<strong>Optional:</strong>
+➡️ Train solo if you follow the program exactly
+
+👉 This phase is about optimization, not motivation.`;
             } else {
                 level = 'PRO';
                 levelClass = 'pro';
-                message = "You are an elite mover. Let's keep you here for the next 20 years. Maintenance, recovery, and progressive challenges will be key to your longevity.";
+                message = `<strong>Reality check:</strong> You're an elite mover. The goal now is longevity.
+
+<strong>What you should focus on:</strong>
+✅ 4–5 training days per week
+✅ Recovery, mobility, deloads
+✅ Smart intensity cycling
+
+<strong>Best next move:</strong>
+➡️ Advanced Maintenance Program / Pro Split – Injury prevention, strength retention, long-term performance
+
+👉 This phase is about staying elite for 20+ years.`;
             }
 
             // Helper function to get level text
@@ -1221,7 +1382,7 @@
                 document.getElementById('resultLevel').textContent = level;
                 document.getElementById('resultLevel').className = 'result-level ' + levelClass;
                 document.getElementById('resultScore').textContent = `Score: ${totalScore}/27`;
-                document.getElementById('resultMessage').textContent = message;
+                document.getElementById('resultMessage').innerHTML = message;
 
                 document.getElementById('enduranceScore').textContent = `${endurance}/9 (${getCategoryLevel(endurance)})`;
                 document.getElementById('flexibilityScore').textContent = `${flexibility}/9 (${getCategoryLevel(flexibility)})`;
