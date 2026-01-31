@@ -1130,6 +1130,10 @@
                     <div class="input-group">
                         <label for="clientContact">Phone or Email *</label>
                         <input type="text" id="clientContact" placeholder="Enter your phone number or email" required>
+                        <div id="contactError"
+                            style="color: #e74c3c; font-size: 0.85rem; margin-top: 5px; display: none;">
+                            Please enter a valid email or UAE/Indian phone number
+                        </div>
                     </div>
                 </div>
 
@@ -1229,14 +1233,66 @@
             progressPercent.textContent = percent + '%';
 
             const nameEntered = document.getElementById('clientName').value.trim() !== '';
-            const contactEntered = document.getElementById('clientContact').value.trim() !== '';
-            submitBtn.disabled = answered < totalQuestions || !nameEntered || !contactEntered;
+            const contactValue = document.getElementById('clientContact').value;
+            const contactValid = validateContact(contactValue);
+
+            submitBtn.disabled = answered < totalQuestions || !nameEntered || !contactValid;
         }
 
         // Listen for changes
         form.addEventListener('change', updateProgress);
         document.getElementById('clientName').addEventListener('input', updateProgress);
-        document.getElementById('clientContact').addEventListener('input', updateProgress);
+        const contactInput = document.getElementById('clientContact');
+        const contactError = document.getElementById('contactError');
+
+        contactInput.addEventListener('input', function () {
+            validateRealTime();
+            updateProgress();
+        });
+
+        // Validation Logic
+        function validateContact(input) {
+            const value = input.trim();
+            if (!value) return false;
+
+            // 1. Email Check
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(value)) return true;
+
+            // 2. Phone Check (Sanitize first)
+            const cleanNumber = value.replace(/[\s\-\(\)]/g, '');
+
+            // UAE Regex:
+            // Matches: +9715... or 05...
+            // Strictly requires the prefix: (+971 or 00971 or 971) OR (0) before the 5.
+            const uaeRegex = /^(?:(?:\+|00)?971|0)5[0-9]{8}$/;
+
+            // India Regex:
+            // Matches: +91 followed by 10 digits OR just 10 digits (typically starting with 6-9)
+            const indiaRegex = /^(?:(?:\+91)|(?:0091))?[6-9][0-9]{9}$/;
+
+            if (uaeRegex.test(cleanNumber) || indiaRegex.test(cleanNumber)) return true;
+
+            return false;
+        }
+
+        function validateRealTime() {
+            const value = contactInput.value.trim();
+            if (value === '') {
+                contactError.style.display = 'none';
+                contactInput.style.borderColor = 'var(--border)';
+                return;
+            }
+
+            const isValid = validateContact(value);
+            if (isValid) {
+                contactError.style.display = 'none';
+                contactInput.style.borderColor = '#2ecc71'; // Green for success
+            } else {
+                contactError.style.display = 'block';
+                contactInput.style.borderColor = '#e74c3c'; // Red for error
+            }
+        }
 
         // Get selected answer text
         function getAnswerText(questionName) {
